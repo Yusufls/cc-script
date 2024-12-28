@@ -1,0 +1,2 @@
+# cc-script
+hh
