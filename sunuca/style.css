@@ -1,0 +1,203 @@
+/* Genel Sayfa Stilleri */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif; /* Daha şık ve yumuşak font */
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.6), rgba(241, 196, 15, 0.6)), 
+                url('https://cdn.discordapp.com/attachments/1307612197345689613/1322322737435381800/65ccf1b3b78ac.jpg?ex=67707484&is=676f2304&hm=459796bdba6f693886307d616dc0f600188e525b1c5a6540019621f4105c8152&') no-repeat center center fixed;
+    background-size: cover;
+    background-attachment: fixed; /* Parallax efekti */
+    color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+    overflow: hidden;
+    position: relative;
+    animation: backgroundAnimation 8s infinite alternate; /* Arka plan animasyonu */
+}
+
+/* Arka Plan Animasyonu */
+@keyframes backgroundAnimation {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Form Konteyneri */
+.form-container {
+    width: 100%;
+    max-width: 480px;
+    background-color: rgba(255, 255, 255, 0.9); /* Hafif şeffaf beyaz */
+    border-radius: 12px;
+    box-shadow: 0px 6px 30px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    text-align: center;
+    animation: formAnimation 0.8s ease-out;
+}
+
+/* Form Girişi Animasyonu */
+@keyframes formAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Başlık */
+h1 {
+    font-size: 32px; /* Başlık font boyutunu büyüttük */
+    font-weight: 300; /* Hafif font ağırlığı */
+    color: #444;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    line-height: 1.4;
+    font-family: 'Poppins', sans-serif; /* Zarif font */
+}
+
+/* Label Stili */
+label {
+    font-size: 16px; /* Daha ince ve zarif font boyutu */
+    color: #555; /* Yumuşak gri rengi */
+    font-weight: 400; /* Hafif ağırlık */
+    margin-bottom: 8px;
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+}
+
+/* Input Alanı */
+.input-group {
+    margin-bottom: 20px; /* Aralar arasındaki boşluk */
+    text-align: left;
+    opacity: 0;
+    animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px; /* Yazı boyutunu biraz küçülttük */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #f9f9f9; /* Hafif gri beyaz */
+    color: #444;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif; /* Yumuşak font */
+    letter-spacing: 0.5px;
+}
+
+/* Ay/Yıl (MM/YY) Girişi - Güzelleştirme */
+#expiryDate {
+    display: flex;
+    justify-content: space-between; /* Alanı ikiye böler: sağda simge, solda metin */
+    align-items: center;
+    padding-left: 20px;
+    background-color: #f9f9f9;
+}
+
+#expiryDate input {
+    width: 100%;
+    padding-right: 40px; /* Sağda simge için alan */
+    font-size: 16px; /* Yazı boyutunu biraz büyütüyoruz */
+    font-family: 'Poppins', sans-serif; /* Yumuşak font */
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 0.5px;
+    font-weight: 500; /* Hafif bold yazı stili */
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Durum Mesajı */
+.status-message {
+    margin-top: 20px;
+    font-size: 14px; /* Durum mesajı yazı boyutunu küçülttük */
+    color: #444;
+    display: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+.success {
+    color: #27ae60; /* Yeşil */
+    font-weight: 600;
+}
+
+.error {
+    color: #e74c3c; /* Kırmızı */
+    font-weight: 600;
+}
+
+/* Placeholder Stili */
+input::placeholder {
+    color: #bbb; /* Placeholder yazı rengini daha soft yapalım */
+    font-style: italic; /* Placeholder yazı tipi biraz daha ince */
+}
+
+/* Düğme Stili */
+button {
+    font-family: 'Poppins', sans-serif; /* Düğme için de aynı şık font */
+    border-radius: 8px; /* Düğme köşelerini yumuşat */
+    font-weight: 600; /* Düğme yazı tipi hafif kalın */
+}
+
+/* Arka Plan Efekti ve Gölgelendirme */
+.form-container {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.6));
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2), 0px 10px 15px rgba(52, 152, 219, 0.3); /* Formu çevreleyen yumuşak gölgeler */
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Logo */
+.logo-container {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    width: 100px; /* Logo genişliği */
+    height: auto;
+    z-index: 10000; /* Logo en üstte */
+}
+
+.logo-container img {
+    width: 100%;
+    height: auto;
+}

